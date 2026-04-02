@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Élite — Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ivory: #faf7f2;
+    --gold: #b89a5e;
+    --gold-light: #d4b87a;
+    --gold-dark: #8a7040;
+    --charcoal: #1a1714;
+    --warm-gray: #6b6560;
+    --border: rgba(184, 154, 94, 0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  header {
+    text-align: center;
+    padding: 80px 40px 60px;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px auto 0;
+  }
+
+  .brand-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 86px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: var(--charcoal);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-top: 24px;
+  }
+
+  main {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 40px 40px 100px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+  }
+
+  .card {
+    background: var(--ivory);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.15s; }
+  .card:nth-child(3) { animation-delay: 0.25s; }
+  .card:nth-child(4) { animation-delay: 0.35s; }
+  .card:nth-child(5) { animation-delay: 0.45s; }
+  .card:nth-child(6) { animation-delay: 0.55s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-image-wrap {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #e8e2d8;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: saturate(0.85);
+  }
+
+  .card:hover .card-image-wrap img {
+    transform: scale(1.06);
+    filter: saturate(1);
+  }
+
+  /* Gold corner accent */
+  .card-image-wrap::before {
+    content: '';
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 24px; height: 24px;
+    border-top: 1px solid var(--gold);
+    border-right: 1px solid var(--gold);
+    z-index: 2;
+    opacity: 0;
+    transform: translate(4px, -4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .card-image-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 16px; left: 16px;
+    width: 24px; height: 24px;
+    border-bottom: 1px solid var(--gold);
+    border-left: 1px solid var(--gold);
+    z-index: 2;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .card:hover .card-image-wrap::before,
+  .card:hover .card-image-wrap::after {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ivory);
+    background: var(--charcoal);
+    padding: 5px 10px;
+    z-index: 3;
+  }
+
+  .card-body {
+    padding: 28px 32px 32px;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+
+  .card-category {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+
+  .card:hover .card-name {
+    color: var(--gold-dark);
+  }
+
+  .card-desc {
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--warm-gray);
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: 0.02em;
+  }
+
+  .price span {
+    font-size: 13px;
+    color: var(--warm-gray);
+    vertical-align: super;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    margin-right: 2px;
+  }
+
+  .btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    background: transparent;
+    border: 1px solid var(--gold);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0;
+  }
+
+  .btn:hover::before { transform: translateX(0); }
+  .btn:hover { color: var(--ivory); }
+  .btn span { position: relative; z-index: 1; }
+
+  /* Loading & error states */
+  .state-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--warm-gray);
+    letter-spacing: 0.05em;
+  }
+
+  .state-message small {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+
+  footer em {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 60px 24px 40px; }
+    main { padding: 20px 20px 80px; }
+    .grid { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="brand-label">Maison Élite — Est. 2018</p>
+  <h1>The <em>Collection</em></h1>
+  <p class="subtitle">Curated objects of exceptional refinement</p>
+</header>
+
+<main>
+  <div class="grid" id="productGrid">
+    <div class="state-message">
+      Loading collection…
+      <small>Fetching from the archive</small>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>All pieces are crafted to order &nbsp;·&nbsp; <em>Maison Élite</em> &nbsp;·&nbsp; Free worldwide shipping</p>
+</footer>
+
+<!-- PapaParse for robust CSV parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+  const SHEET_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRLsBI1aK7xMMsI6Gksm1RckfUUlNj6sUeR1A3-G_ASQAug09HIkoBp6obzV3LfwCKAbcFim4tdWE1b/pub?output=csv';
+
+  const grid = document.getElementById('productGrid');
+
+  function renderCard(p, index) {
+    const delay = (index * 0.1 + 0.05).toFixed(2);
+    return `
+      <article class="card" style="animation-delay:${delay}s">
+        <div class="card-image-wrap">
+          ${p.badge && p.badge.trim() ? `<span class="badge">${p.badge.trim()}</span>` : ''}
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+        </div>
+        <div class="card-body">
+          <p class="card-category">${p.category}</p>
+          <h2 class="card-name">${p.name}</h2>
+          <p class="card-desc">${p.desc}</p>
+          <div class="card-footer">
+            <div class="price"><span>$</span>${p.price}</div>
+            <button class="btn"><span>Add to Cart</span></button>
+          </div>
+        </div>
+      </article>
+    `;
+  }
+
+  Papa.parse(SHEET_CSV_URL, {
+    download: true,
+    header: true,        // use first row as field names
+    skipEmptyLines: true,
+    complete: function(results) {
+      const rows = results.data;
+
+      if (!rows || rows.length === 0) {
+        grid.innerHTML = `
+          <div class="state-message">
+            No products found
+            <small>The collection appears to be empty</small>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = rows.map(renderCard).join('');
+    },
+    error: function(err) {
+      console.error('CSV fetch error:', err);
+      grid.innerHTML = `
+        <div class="state-message">
+          Unable to load collection
+          <small>Please check your connection and try again</small>
+        </div>`;
+    }
+  });
+</script>
+</body>
+</html>
